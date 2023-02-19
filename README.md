@@ -1,5 +1,6 @@
 <div align="center">
-# Ticketing (mon-marche.fr) WIP
+
+# [WIP] Ticketing (mon-marche.fr)
 
 Temps de réalisation : 2h30
 
