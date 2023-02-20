@@ -14,10 +14,8 @@ Temps de réalisation : 2h30
 ## WIP
 
 1. Ajout d'une config via un dotenv
-1. Commentaires (notamment des choix)
-1. Optimisations (notamment traitement du payload)
+1. Optimisations du traitement du payload
 1. Installation/Déploiement via Docker
-1. Meilleur gestion de données érronées
 1. Test Unitaire + test de charges
 
 ## Installation (WIP)
