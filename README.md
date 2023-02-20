@@ -1,6 +1,6 @@
 <div align="center">
 
-# [WIP] Ticketing (mon-marche.fr)
+# Ticketing (mon-marche.fr)
 </div>
 
 Temps de réalisation : ~4h30
@@ -36,8 +36,10 @@ Temps de réalisation : ~4h30
 <br/>
 `cd ticketing-monmarche`
 <br/>
-`go mod download
+```
+go mod download
 go build -o build/ticket .
-./build/ticket`
+./build/ticket
+```
 
 Possibilité d'envoi de requêtes sur `:3000.ticket`, le payload est attendu en `text/plain` suivant le format renseigné dans l'exemple
