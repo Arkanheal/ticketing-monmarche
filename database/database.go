@@ -15,9 +15,9 @@ func Connect() error {
 
 	p := config.Config("DB_PORT")
 	host := config.Config("DB_HOST")
-	user := config.Config("DB_USER")
-	password := config.Config("DB_PWD")
-	dbname := config.Config("DB_NAME")
+	user := config.Config("POSTGRES_USER")
+	password := config.Config("POSTGRES_PASSWORD")
+	dbname := config.Config("POSTGRES_DB")
 
 	port, err := strconv.ParseUint(p, 10, 32)
 

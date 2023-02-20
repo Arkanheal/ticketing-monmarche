@@ -36,5 +36,5 @@ func main() {
     router.SetupRoutes(app)
 
     // Lancement de l'app
-    app.Listen("localhost:3000")
+    app.Listen(":3000")
 }
