@@ -22,6 +22,9 @@ func parseOrderData(line string, regex string) string {
 func CreateOrder(c *fiber.Ctx) error {
 	var err error
 
+	tx, err := database.DB.BeginTx(c.Context(), nil)
+	defer tx.Rollback()
+
 	order := new(model.Order)
 
 	// Get payload datas
@@ -79,7 +82,7 @@ func CreateOrder(c *fiber.Ctx) error {
 
 	// Insert product(s)
 	for _, product := range field[1:] {
-        // Imaginons qu'on change le prix du même produits
+		// Imaginons qu'on change le prix du même produits
 		_, err := database.DB.Query(`INSERT INTO products (id, price, name)
             VALUES ($1, $2, $3)
             ON CONFLICT (id) DO UPDATE SET price = EXCLUDED.price, name = EXCLUDED.name`, product[1], product[2], product[0])
@@ -91,7 +94,7 @@ func CreateOrder(c *fiber.Ctx) error {
 			})
 		}
 
-        // Ajout pour le lien avec les commandes
+		// Ajout pour le lien avec les commandes
 		_, err = database.DB.Query("INSERT INTO product_order (product_id, order_id) VALUES ($1, $2)", product[1], order.Id)
 		if err != nil {
 			return c.Status(500).JSON(&fiber.Map{
@@ -101,10 +104,18 @@ func CreateOrder(c *fiber.Ctx) error {
 		}
 	}
 
+	// Commit les changements en DB si tout se passe bien
+	if err = tx.Commit(); err != nil {
+		return c.Status(500).JSON(&fiber.Map{
+			"success": false,
+			"message": err,
+		})
+	}
+
 	return c.JSON(&fiber.Map{
-		"success": true,
-		"message": "Order and products successfully created",
+		"success":  true,
+		"message":  "Order and products successfully created",
 		"order_id": order.Id,
-    })
+	})
 
 }
