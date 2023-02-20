@@ -7,5 +7,6 @@ import (
 
 func SetupRoutes(app *fiber.App) {
 
+    // Un seul endpoint donc c'est facile
     app.Post("/ticket", handler.CreateOrder)
 }
