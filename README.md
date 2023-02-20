@@ -32,11 +32,9 @@ Temps de réalisation : ~4h30
 * PostgreSQL
 * Une base ticket (un exemple de configuration de la base est présente dans `.env`)
 
-`git clone https://github.com/Arkanheal/ticketing-monmarche.git`
-<br/>
-`cd ticketing-monmarche`
-<br/>
 ```
+git clone https://github.com/Arkanheal/ticketing-monmarche.git
+cd ticketing-monmarche
 go mod download
 go build -o build/ticket .
 ./build/ticket
