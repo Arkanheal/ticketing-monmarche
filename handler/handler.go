@@ -2,7 +2,6 @@ package handler
 
 import (
 	"encoding/csv"
-	"log"
 	"regexp"
 	"strconv"
 	"strings"
@@ -20,7 +19,7 @@ func parseOrderData(line string, regex string) string {
 }
 
 func returnErr(c *fiber.Ctx, err error, s int) {
-    log.Println(err)
+    panic(err)
     c.Status(s).JSON(&fiber.Map{
         "success": false,
         "message": err,
@@ -58,7 +57,6 @@ func CreateOrder(c *fiber.Ctx) error {
     if err != nil {
         returnErr(c, err, 400)
     }
-    log.Println(field)
 
     // Insert order now (in case product wasn't valid)
     _, err = database.DB.Query("INSERT INTO orders (id, VAT, total) VALUES ($1, $2, $3)", order.Id, order.VAT, order.Price)
