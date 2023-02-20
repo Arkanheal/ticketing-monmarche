@@ -4,18 +4,20 @@ import (
 	"database/sql"
 	"fmt"
 	"strconv"
+
+    "tickets/config"
 )
 
 var DB *sql.DB
 
 func Connect() error {
 	var err error
-	// Todo use config file to get from dotenv
-	p := "5432"
-	host := "localhost"
-	user := "ticket_adm"
-	password := "password"
-	dbname := "ticket"
+
+	p := config.Config("DB_PORT")
+	host := config.Config("DB_HOST")
+	user := config.Config("DB_USER")
+	password := config.Config("DB_PWD")
+	dbname := config.Config("DB_NAME")
 
 	port, err := strconv.ParseUint(p, 10, 32)
 
